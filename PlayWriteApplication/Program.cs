@@ -28,7 +28,7 @@ IPage page = await context.NewPageAsync();
 await Login();
 
 Console.ReadKey();
-//"search-input"
+
 async Task Login()
 {
     await page.GotoAsync(hh.Login);
@@ -51,11 +51,6 @@ async Task Login()
 
     await page.ClickAsync(hh.RefQa("vacancy-serp__vacancy_response"));
 
-    //var vacancyAbroad = await page.IsVisibleAsync(hh.SpanRelocate());
-    //if (vacancyAbroad)
-    //{
-    //    await page.ClickAsync(hh.ButtonQa("relocation-warning-abort"));
-    //}
 
     string userMassage =$"Напиши небольшое сопроводительное письмо для вакансии {vacancy} ";      
     ChatGptClient chatGptClient = new ChatGptClient(openAiKey);
@@ -63,12 +58,5 @@ async Task Login()
     await page.TypeAsync(hh.TextareaQa("vacancy-response-popup-form-letter-input"),message);
 
 
-    //var vacancys = await page.GetAttributeAsync(hh.RefQa("vacancy-serp__vacancy_response"),"href");
-    //while (countVacancys>0)
-    //{
-    //   vacancys.Add(await page.GetAttributeAsync("div.serp-item-controls > a ", "href"));
-
-    //    countVacancys--;
-    //}
-
+    
 }
