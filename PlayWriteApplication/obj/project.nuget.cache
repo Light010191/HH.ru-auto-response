@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "DpUT3nsiAmG08sO2mfGk7xT0JolMNjzfKCcaecYugVvd5FRrWwfFaBVp3+a+MKCucdvH+RdhJlEHd6iUOpXOuQ==",
+  "success": true,
+  "projectFilePath": "E:\\проэкты\\С#\\05.2023\\PlayWriteApplication\\PlayWriteApplication\\PlayWriteApplication.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Иван\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\7.0.0\\microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",
+    "C:\\Users\\Иван\\.nuget\\packages\\microsoft.playwright\\1.33.0\\microsoft.playwright.1.33.0.nupkg.sha512",
+    "C:\\Users\\Иван\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512",
+    "C:\\Users\\Иван\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
+    "C:\\Users\\Иван\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
