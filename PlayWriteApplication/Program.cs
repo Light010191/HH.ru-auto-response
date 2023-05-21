@@ -8,8 +8,8 @@ using System.Diagnostics.Metrics;
 var openAiKey = Environment.GetEnvironmentVariable("OpenAI_token");
 
 var hh = new HhPages("https://hh.ru");
-var login = "Light010191@yandex.ru";
-var password = "424Light080";
+var login = "Login-hh.ru";
+var password = "password-hh.ru";
 var vacancy = "разработчик junior C#";
 
 using var playwright = await Playwright.CreateAsync();
@@ -57,7 +57,7 @@ async Task Login()
     //    await page.ClickAsync(hh.ButtonQa("relocation-warning-abort"));
     //}
 
-    string userMassage =$"Напиши небольшое сопроводительное письмо для вакансии{vacancy} ";      
+    string userMassage =$"Напиши небольшое сопроводительное письмо для вакансии {vacancy} ";      
     ChatGptClient chatGptClient = new ChatGptClient(openAiKey);
     string message = await chatGptClient.GetChatGptMessage(userMassage);
     await page.TypeAsync(hh.TextareaQa("vacancy-response-popup-form-letter-input"),message);
