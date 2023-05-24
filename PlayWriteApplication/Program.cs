@@ -8,11 +8,11 @@ using System.Diagnostics.Metrics;
 var openAiKey = Environment.GetEnvironmentVariable("OpenAI_token");
 
 var hh = new HhPages("https://hh.ru");
-var login = "Light010191@yandex.ru";
-var password = "424Light080";
+var login = "Login HH.ru";
+var password = "Password HH.ru";
 var vacancy = "разработчик junior C#";
 
-string userMassage = $"Я начинающий разработчик  на языке С#, меня зовут Иван, мне 32 года. Напиши небольшое сопроводительное письмо для вакансии {vacancy} ";
+string userMassage = $"Напиши небольшое сопроводительное письмо для вакансии {vacancy} ";
 ChatGptClient chatGptClient = new ChatGptClient(openAiKey);
 string message = await chatGptClient.GetChatGptMessage(userMassage);
 
@@ -42,9 +42,9 @@ async Task Login()
     await page.TypeAsync(hh.InputQa("login-input-password"),  password);
     await page.ClickAsync(hh.ButtonQa("account-login-submit"));
 
-    //var incorrectPassword = await page.IsVisibleAsync(hh.DivQa("account-login-error"));
-    //if (incorrectPassword)        throw new Exception("Incorrect login or password");
-        
+    var incorrectPassword = await page.IsVisibleAsync(hh.DivQa("account-login-error"));
+    if (incorrectPassword) throw new Exception("Incorrect login or password");
+
     await page.ClickAsync(hh.ButtonQa("search-button"));
 
     var val = await page.TextContentAsync(hh.CountVacancysQa());    
