@@ -30,7 +30,7 @@ namespace PlayWriteApplication
         {
             var chatGptSend = new GptSend
             {
-                Model = "gpt-3.5-turbo",
+                Model = "gpt-3.5-turbo",               
                 Messages = new Message[] { new Message() { Role = "user", Content = userMessage } }
             };
 

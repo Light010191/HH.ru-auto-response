@@ -8,16 +8,20 @@ using System.Diagnostics.Metrics;
 var openAiKey = Environment.GetEnvironmentVariable("OpenAI_token");
 
 var hh = new HhPages("https://hh.ru");
-var login = "Login-hh.ru";
-var password = "password-hh.ru";
+var login = "Light010191@yandex.ru";
+var password = "424Light080";
 var vacancy = "разработчик junior C#";
+
+string userMassage = $"Я начинающий разработчик  на языке С#, меня зовут Иван, мне 32 года. Напиши небольшое сопроводительное письмо для вакансии {vacancy} ";
+ChatGptClient chatGptClient = new ChatGptClient(openAiKey);
+string message = await chatGptClient.GetChatGptMessage(userMassage);
 
 using var playwright = await Playwright.CreateAsync();
 await using IBrowser browser = await playwright.Chromium.LaunchAsync(
     new BrowserTypeLaunchOptions
     {
         Headless = false,
-        SlowMo =200,
+        SlowMo =300,
         Timeout = 30000,       
     }) ;
 
@@ -38,25 +42,25 @@ async Task Login()
     await page.TypeAsync(hh.InputQa("login-input-password"),  password);
     await page.ClickAsync(hh.ButtonQa("account-login-submit"));
 
-    var incorrectPassword = await page.IsVisibleAsync(hh.DivQa("account-login-error"));
-    if (incorrectPassword)        throw new Exception("Incorrect login or password"); 
-
-    await page.TypeAsync(hh.InputQa("search-input"), vacancy);
+    //var incorrectPassword = await page.IsVisibleAsync(hh.DivQa("account-login-error"));
+    //if (incorrectPassword)        throw new Exception("Incorrect login or password");
+        
     await page.ClickAsync(hh.ButtonQa("search-button"));
-    var val = await page.TextContentAsync(hh.CountVacancysQa());
 
+    var val = await page.TextContentAsync(hh.CountVacancysQa());    
     int countVacancys;
     int.TryParse(string.Join("", val.Where(c => char.IsDigit(c))), out countVacancys);
     if (countVacancys == 0) throw new Exception("вакансий не найдено");
 
+    await page.TypeAsync(hh.InputQa("search-input"), vacancy);
+    await page.ClickAsync(hh.ButtonQa("search-button"));       
+
     await page.ClickAsync(hh.RefQa("vacancy-serp__vacancy_response"));
 
-
-    string userMassage =$"Напиши небольшое сопроводительное письмо для вакансии {vacancy} ";      
-    ChatGptClient chatGptClient = new ChatGptClient(openAiKey);
-    string message = await chatGptClient.GetChatGptMessage(userMassage);
-    await page.TypeAsync(hh.TextareaQa("vacancy-response-popup-form-letter-input"),message);
+    var textAreaButton = await page.IsVisibleAsync(hh.ButtonQa("vacancy-response-letter-toggle"));
+    if (textAreaButton) await page.ClickAsync(hh.ButtonQa("vacancy-response-letter-toggle"));
+    else await page.TypeAsync(hh.TextareaQa("vacancy-response-popup-form-letter-input"), message);
 
 
-    
+
 }

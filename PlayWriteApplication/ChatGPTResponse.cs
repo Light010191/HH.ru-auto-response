@@ -48,10 +48,10 @@ namespace PlayWriteApplication
         public long PromptTokens { get; set; }
 
         [JsonPropertyName("completion_tokens")]
-        public long CompletionTokens { get; set; }
+        public long CompletionTokens { get; set; } = 4000;
 
         [JsonPropertyName("total_tokens")]
-        public long TotalTokens { get; set; }
+        public long TotalTokens { get; set; } = 4000;
     }
 }
 
