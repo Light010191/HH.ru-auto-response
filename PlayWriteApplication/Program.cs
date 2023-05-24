@@ -50,7 +50,7 @@ async Task Login()
     var val = await page.TextContentAsync(hh.CountVacancysQa());    
     int countVacancys;
     int.TryParse(string.Join("", val.Where(c => char.IsDigit(c))), out countVacancys);
-    if (countVacancys == 0) throw new Exception("вакансий не найдено");
+    if (countVacancys == 0) throw new Exception("no vacancies found");
 
     await page.TypeAsync(hh.InputQa("search-input"), vacancy);
     await page.ClickAsync(hh.ButtonQa("search-button"));       
